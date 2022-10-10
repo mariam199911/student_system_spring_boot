@@ -1,4 +1,7 @@
 package com.mariam.springboot.studentsystem.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 
 import javax.persistence.*;
@@ -25,6 +28,7 @@ public class Teacher {
     private String mobileNum;
 
     @OneToMany(mappedBy = "teacher")
+    @JsonIgnore
     private List<Course> courses;
 
     public Teacher() {
@@ -64,6 +68,14 @@ public class Teacher {
 
     public String getMobileNum() {
         return mobileNum;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 
     public void setMobileNum(String mobileNum) {

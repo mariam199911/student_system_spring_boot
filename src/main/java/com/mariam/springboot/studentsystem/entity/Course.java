@@ -1,5 +1,5 @@
 package com.mariam.springboot.studentsystem.entity;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,6 +25,7 @@ public class Course {
                     name = "student_id"
             )
     )
+    @JsonIgnore
     private  List<Student> students;
 
     @Column(name="name")
@@ -35,10 +36,13 @@ public class Course {
     private Teacher teacher;
 
 
+
     @OneToMany(mappedBy = "course")
+    @JsonIgnore
     private List<Assignment> assignments;
 
     @OneToMany(mappedBy = "course")
+    @JsonIgnore
     private List<CourseAttendence> courseAttendences;
 
 
@@ -77,7 +81,29 @@ public class Course {
         this.assignments = assignments;
     }
 
+    public List<Student> getStudents() {
+        return students;
+    }
 
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public List<CourseAttendence> getCourseAttendences() {
+        return courseAttendences;
+    }
+
+    public void setCourseAttendences(List<CourseAttendence> courseAttendences) {
+        this.courseAttendences = courseAttendences;
+    }
     // define tostring
     @Override
     public String toString() {

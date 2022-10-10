@@ -1,4 +1,6 @@
 package com.mariam.springboot.studentsystem.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 import javax.persistence.*;
@@ -15,11 +17,14 @@ public class Assignment {
     @Column(name="id")
     private int id;
 
+
     @OneToMany(mappedBy = "assignment")
+    @JsonIgnore
     private List<AssignmentSubmission> assignmentSubmissions;
 
     @ManyToOne
     @JoinColumn(name="course_id")
+    @JsonIgnore
     private Course course;
 
     @Column(name="description")
@@ -53,6 +58,29 @@ public class Assignment {
         this.description = description;
     }
 
+    public List<AssignmentSubmission> getAssignmentSubmissions() {
+        return assignmentSubmissions;
+    }
+
+    public void setAssignmentSubmissions(List<AssignmentSubmission> assignmentSubmissions) {
+        this.assignmentSubmissions = assignmentSubmissions;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 
     // define tostring
