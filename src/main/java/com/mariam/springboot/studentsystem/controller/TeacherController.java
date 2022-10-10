@@ -2,14 +2,12 @@ package com.mariam.springboot.studentsystem.controller;
 
 
 import com.mariam.springboot.studentsystem.entity.Admin;
+import com.mariam.springboot.studentsystem.entity.Assignment;
 import com.mariam.springboot.studentsystem.entity.Course;
 import com.mariam.springboot.studentsystem.entity.Student;
 import com.mariam.springboot.studentsystem.service.TeacherService;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,5 +30,25 @@ public class TeacherController {
     public List<Course> listCourses(@PathVariable int teacherId) {
         List<Course> theCourses = teacherService.getAllCourses(teacherId);
         return theCourses;
+    }
+
+    @GetMapping("/studentCourses/{studentId}")
+    public List<Course> studentCourses(@PathVariable int studentId) {
+        List<Course> theCourses = teacherService.viewStudentsAssignedCourses(studentId);
+        return theCourses;
+    }
+
+    @GetMapping("/courseStudents/{courseId}")
+    public List<Student> courseStudents(@PathVariable int courseId) {
+        List<Student> theCourses = teacherService.getStudentsInCourse(courseId);
+        return theCourses;
+    }
+
+    @PostMapping("/addAssignment")
+    public Assignment addAssignment(@RequestBody Assignment theAssignment) {
+
+        theAssignment.setId(0);
+        teacherService.addAssignment(theAssignment);
+        return theAssignment;
     }
 }

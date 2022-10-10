@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -24,12 +25,13 @@ public class Assignment {
 
     @ManyToOne
     @JoinColumn(name="course_id")
-    @JsonIgnore
     private Course course;
 
     @Column(name="description")
     private String description;
 
+    @Column(name = "local_date")
+    private Date dueDate;
 
 
     public Assignment() {
@@ -76,6 +78,14 @@ public class Assignment {
 
     public String getDescription() {
         return description;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
     }
 
     public void setDescription(String description) {

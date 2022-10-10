@@ -1,9 +1,7 @@
 package com.mariam.springboot.studentsystem.service;
 
-import com.mariam.springboot.studentsystem.dao.AdminRepository;
-import com.mariam.springboot.studentsystem.dao.CourseRepository;
-import com.mariam.springboot.studentsystem.dao.StudentRepository;
-import com.mariam.springboot.studentsystem.dao.TeacherRepository;
+import com.mariam.springboot.studentsystem.dao.*;
+import com.mariam.springboot.studentsystem.entity.Assignment;
 import com.mariam.springboot.studentsystem.entity.Course;
 import com.mariam.springboot.studentsystem.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +15,14 @@ public class TeacherServiceImp implements TeacherService{
     private TeacherRepository teacherRepository;
     private StudentRepository studentRepository;
     private CourseRepository courseRepository;
+    private AssignmentRepository assignmentRepository;
 
     @Autowired
-    public TeacherServiceImp(TeacherRepository teacherRepository, StudentRepository studentRepository,CourseRepository courseRepository) {
+    public TeacherServiceImp(TeacherRepository teacherRepository, StudentRepository studentRepository,CourseRepository courseRepository,AssignmentRepository assignmentRepository) {
         this.teacherRepository = teacherRepository;
         this.studentRepository = studentRepository;
         this.courseRepository =courseRepository;
+        this.assignmentRepository = assignmentRepository;
     }
 
     @Override
@@ -45,5 +45,20 @@ public class TeacherServiceImp implements TeacherService{
     @Override
     public List<Course> getAllCourses(int TeacherId) {
         return courseRepository.getAllCourses(TeacherId);
+    }
+
+    @Override
+    public List<Student> getStudentsInCourse(int courseId) {
+        return studentRepository.getStudentsInCourse(courseId);
+    }
+
+    @Override
+    public List<Course> viewStudentsAssignedCourses(int studentId) {
+        return courseRepository.viewStudentsAssignedCourses(studentId);
+    }
+
+    @Override
+    public void addAssignment(Assignment assignment) {
+        assignmentRepository.save(assignment);
     }
 }
