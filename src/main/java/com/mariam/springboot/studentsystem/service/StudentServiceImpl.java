@@ -1,6 +1,10 @@
 package com.mariam.springboot.studentsystem.service;
 
+import com.mariam.springboot.studentsystem.dao.AssignmentRepository;
+import com.mariam.springboot.studentsystem.dao.CourseRepository;
 import com.mariam.springboot.studentsystem.dao.StudentRepository;
+import com.mariam.springboot.studentsystem.entity.Assignment;
+import com.mariam.springboot.studentsystem.entity.Course;
 import com.mariam.springboot.studentsystem.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +15,14 @@ import java.util.Optional;
 @Service
 public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
+    private CourseRepository courseRepository;
+    private AssignmentRepository assignmentRepository;
 
     @Autowired
-    public StudentServiceImpl(StudentRepository theStudentRepository) {
-        studentRepository = theStudentRepository;
+    public StudentServiceImpl(StudentRepository theStudentRepository,CourseRepository courseRepository,AssignmentRepository assignmentRepository) {
+        this.studentRepository = theStudentRepository;
+        this.courseRepository = courseRepository;
+        this.assignmentRepository = assignmentRepository;
     }
 
     @Override
@@ -52,6 +60,16 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void enrollCourse(int studentId) {
 //        studentRepository.deleteById(studentId);
+    }
+
+    @Override
+    public List<Course> viewEnrolledCourses(int studentId) {
+        return courseRepository.viewStudentsAssignedCourses(studentId);
+    }
+
+    @Override
+    public List<Assignment> viewAssignments(int courseId) {
+        return assignmentRepository.viewAssignments(courseId);
     }
 }
 

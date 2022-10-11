@@ -2,6 +2,8 @@ package com.mariam.springboot.studentsystem.controller;
 
 import java.util.List;
 
+import com.mariam.springboot.studentsystem.entity.Assignment;
+import com.mariam.springboot.studentsystem.entity.Course;
 import com.mariam.springboot.studentsystem.entity.Student;
 import com.mariam.springboot.studentsystem.service.StudentService;
 import org.springframework.ui.Model;
@@ -66,6 +68,18 @@ public class StudentController {
     }
 
 
+    @GetMapping("/viewAssignments/{courseId}")
+    public List<Assignment> viewAssignments(@PathVariable int courseId) {
+        // get employees from db
+        List<Assignment> theAssgnments = studentService.viewAssignments(courseId);
+        return theAssgnments;
+    }
 
+    @GetMapping("/viewEnrolledCourses/{studentId}")
+    public List<Course> viewEnrolledCourses(@PathVariable int studentId) {
+        // get employees from db
+        List<Course> theCourses = studentService.viewEnrolledCourses(studentId);
+        return theCourses;
+    }
 
 }
