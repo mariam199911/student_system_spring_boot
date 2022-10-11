@@ -1,9 +1,11 @@
 package com.mariam.springboot.studentsystem.service;
 
 import com.mariam.springboot.studentsystem.dao.AssignmentRepository;
+import com.mariam.springboot.studentsystem.dao.AssignmentSubmissionRepository;
 import com.mariam.springboot.studentsystem.dao.CourseRepository;
 import com.mariam.springboot.studentsystem.dao.StudentRepository;
 import com.mariam.springboot.studentsystem.entity.Assignment;
+import com.mariam.springboot.studentsystem.entity.AssignmentSubmission;
 import com.mariam.springboot.studentsystem.entity.Course;
 import com.mariam.springboot.studentsystem.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,14 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
     private CourseRepository courseRepository;
     private AssignmentRepository assignmentRepository;
+    private AssignmentSubmissionRepository assignmentSubmissionRepository;
 
     @Autowired
-    public StudentServiceImpl(StudentRepository theStudentRepository,CourseRepository courseRepository,AssignmentRepository assignmentRepository) {
+    public StudentServiceImpl(StudentRepository theStudentRepository,CourseRepository courseRepository,AssignmentRepository assignmentRepository,AssignmentSubmissionRepository assignmentSubmissionRepository) {
         this.studentRepository = theStudentRepository;
         this.courseRepository = courseRepository;
         this.assignmentRepository = assignmentRepository;
+        this.assignmentSubmissionRepository = assignmentSubmissionRepository;
     }
 
     @Override
@@ -70,6 +74,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Assignment> viewAssignments(int courseId) {
         return assignmentRepository.viewAssignments(courseId);
+    }
+
+    @Override
+    public void submitAssignment(AssignmentSubmission assignmentSubmission) {
+        assignmentSubmissionRepository.save(assignmentSubmission);
     }
 }
 

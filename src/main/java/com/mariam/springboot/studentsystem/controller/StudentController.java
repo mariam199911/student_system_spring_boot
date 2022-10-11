@@ -3,6 +3,7 @@ package com.mariam.springboot.studentsystem.controller;
 import java.util.List;
 
 import com.mariam.springboot.studentsystem.entity.Assignment;
+import com.mariam.springboot.studentsystem.entity.AssignmentSubmission;
 import com.mariam.springboot.studentsystem.entity.Course;
 import com.mariam.springboot.studentsystem.entity.Student;
 import com.mariam.springboot.studentsystem.service.StudentService;
@@ -80,6 +81,15 @@ public class StudentController {
         // get employees from db
         List<Course> theCourses = studentService.viewEnrolledCourses(studentId);
         return theCourses;
+    }
+
+    @PostMapping("/newAssignmentSubmission")
+    public AssignmentSubmission AssignmentSubmission(@RequestBody AssignmentSubmission assignmentSubmission) {
+        // also just in case the pass an id in JSON ... set id to 0
+        // this is force a save of new item ... instead of update
+        assignmentSubmission.setId(0);
+        studentService.submitAssignment(assignmentSubmission);
+        return assignmentSubmission;
     }
 
 }

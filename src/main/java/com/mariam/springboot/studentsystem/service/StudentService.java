@@ -1,6 +1,7 @@
 package com.mariam.springboot.studentsystem.service;
 
 import com.mariam.springboot.studentsystem.entity.Assignment;
+import com.mariam.springboot.studentsystem.entity.AssignmentSubmission;
 import com.mariam.springboot.studentsystem.entity.Course;
 import com.mariam.springboot.studentsystem.entity.Student;
 
@@ -19,11 +20,8 @@ public interface StudentService {
     public void enrollCourse(int studentId);
 
     //////////////////////////////////////////////////////////////
-//    viewEnrolledCourses()
-//    viewAssignments(CourseID)
-//    submitAssignment(AssignmentSubmission)
 
     public List<Course> viewEnrolledCourses(int studentId);
     public List<Assignment> viewAssignments(int courseId);
-
+    public void submitAssignment(AssignmentSubmission assignmentSubmission);
 }
