@@ -54,7 +54,7 @@ public class Student {
 
     @OneToMany(mappedBy = "student")
     @JsonIgnore
-    private List<CourseAttendence> courseAttendences;
+    private List<CourseAttendance> courseAttendences;
 
     @OneToMany(mappedBy = "student")
     @JsonIgnore
@@ -139,11 +139,11 @@ public class Student {
         this.courses = courses;
     }
 
-    public List<CourseAttendence> getCourseAttendences() {
+    public List<CourseAttendance> getCourseAttendences() {
         return courseAttendences;
     }
 
-    public void setCourseAttendences(List<CourseAttendence> courseAttendences) {
+    public void setCourseAttendences(List<CourseAttendance> courseAttendences) {
         this.courseAttendences = courseAttendences;
     }
 

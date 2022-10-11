@@ -1,11 +1,13 @@
 package com.mariam.springboot.studentsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name="course_attendence")
-public class CourseAttendence {
+public class CourseAttendance {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id")
@@ -19,19 +21,19 @@ public class CourseAttendence {
     @JoinColumn(name="student_id")
     private Student student;
 
-    @Column(name="attendencce_date")
-    private LocalDate attendencce_date;
+    @Column(name="attendance_date")
+    private Date attendencceDate;
 
     @Column(name="status")
     private String status;
 
-    public CourseAttendence() {
+    public CourseAttendance() {
 
     }
-    public CourseAttendence(Course course, Student student, LocalDate attendencce_date, String status) {
+    public CourseAttendance(Course course, Student student, Date attendencce_date, String status) {
         this.course = course;
         this.student = student;
-        this.attendencce_date = attendencce_date;
+        this.attendencceDate = attendencce_date;
         this.status = status;
     }
 
@@ -59,12 +61,12 @@ public class CourseAttendence {
         this.student = student;
     }
 
-    public LocalDate getAttendencce_date() {
-        return attendencce_date;
+    public Date getAttendencce_date() {
+        return attendencceDate;
     }
 
-    public void setAttendencce_date(LocalDate attendencce_date) {
-        this.attendencce_date = attendencce_date;
+    public void setAttendencce_date(Date attendencce_date) {
+        this.attendencceDate = attendencce_date;
     }
 
     public String getStatus() {
@@ -81,7 +83,7 @@ public class CourseAttendence {
                 "id=" + id +
                 ", course=" + course +
                 ", student=" + student +
-                ", attendencce_date=" + attendencce_date +
+                ", attendencce_date=" + attendencceDate +
                 ", status='" + status + '\'' +
                 '}';
     }

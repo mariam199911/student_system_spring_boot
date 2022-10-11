@@ -3,6 +3,7 @@ package com.mariam.springboot.studentsystem.service;
 import com.mariam.springboot.studentsystem.dao.*;
 import com.mariam.springboot.studentsystem.entity.Assignment;
 import com.mariam.springboot.studentsystem.entity.Course;
+import com.mariam.springboot.studentsystem.entity.CourseAttendance;
 import com.mariam.springboot.studentsystem.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,17 @@ public class TeacherServiceImp implements TeacherService{
     private StudentRepository studentRepository;
     private CourseRepository courseRepository;
     private AssignmentRepository assignmentRepository;
+    public CourseAttendanceRepository courseAttendanceRepository;
 
     @Autowired
-    public TeacherServiceImp(TeacherRepository teacherRepository, StudentRepository studentRepository,CourseRepository courseRepository,AssignmentRepository assignmentRepository) {
+    public TeacherServiceImp(TeacherRepository teacherRepository, StudentRepository studentRepository,
+                             CourseRepository courseRepository,AssignmentRepository assignmentRepository,
+                             CourseAttendanceRepository courseAttendanceRepository) {
         this.teacherRepository = teacherRepository;
         this.studentRepository = studentRepository;
         this.courseRepository =courseRepository;
         this.assignmentRepository = assignmentRepository;
+        this.courseAttendanceRepository = courseAttendanceRepository;
     }
 
     @Override
@@ -61,4 +66,14 @@ public class TeacherServiceImp implements TeacherService{
     public void addAssignment(Assignment assignment) {
         assignmentRepository.save(assignment);
     }
+
+    @Override
+    public void submitStudentsAttendance(List<CourseAttendance> courseAttendances) {
+        for (CourseAttendance courseAttendance:
+                courseAttendances) {
+            courseAttendance.setId(0);
+             courseAttendanceRepository.save(courseAttendance);
+        }
+    }
+
 }

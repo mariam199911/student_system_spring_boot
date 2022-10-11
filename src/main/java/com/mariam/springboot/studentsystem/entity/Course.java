@@ -43,7 +43,7 @@ public class Course {
 
     @OneToMany(mappedBy = "course")
     @JsonIgnore
-    private List<CourseAttendence> courseAttendences;
+    private List<CourseAttendance> courseAttendences;
 
 
 
@@ -97,11 +97,11 @@ public class Course {
         this.teacher = teacher;
     }
 
-    public List<CourseAttendence> getCourseAttendences() {
+    public List<CourseAttendance> getCourseAttendences() {
         return courseAttendences;
     }
 
-    public void setCourseAttendences(List<CourseAttendence> courseAttendences) {
+    public void setCourseAttendences(List<CourseAttendance> courseAttendences) {
         this.courseAttendences = courseAttendences;
     }
     // define tostring

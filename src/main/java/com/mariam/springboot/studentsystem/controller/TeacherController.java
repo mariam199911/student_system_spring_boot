@@ -1,10 +1,7 @@
 package com.mariam.springboot.studentsystem.controller;
 
 
-import com.mariam.springboot.studentsystem.entity.Admin;
-import com.mariam.springboot.studentsystem.entity.Assignment;
-import com.mariam.springboot.studentsystem.entity.Course;
-import com.mariam.springboot.studentsystem.entity.Student;
+import com.mariam.springboot.studentsystem.entity.*;
 import com.mariam.springboot.studentsystem.service.TeacherService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -50,5 +47,11 @@ public class TeacherController {
         theAssignment.setId(0);
         teacherService.addAssignment(theAssignment);
         return theAssignment;
+    }
+
+    @PostMapping("/submitStudentsAttendance")
+    public List<CourseAttendance> submitStudentsAttendance(@RequestBody List<CourseAttendance> courseAttendances) {
+        teacherService.submitStudentsAttendance(courseAttendances);
+        return courseAttendances;
     }
 }
