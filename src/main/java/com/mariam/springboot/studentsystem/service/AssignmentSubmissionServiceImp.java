@@ -2,6 +2,7 @@ package com.mariam.springboot.studentsystem.service;
 
 import com.mariam.springboot.studentsystem.dao.AssignmentSubmissionRepository;
 import com.mariam.springboot.studentsystem.entity.AssignmentSubmission;
+import com.mariam.springboot.studentsystem.entity.CourseAttendance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,4 +38,5 @@ public class AssignmentSubmissionServiceImp implements AssignmentSubmissionServi
         Optional<AssignmentSubmission> result = assignmentSubmissionRepository.findById(id);
         return result.orElse(null);
     }
+
 }

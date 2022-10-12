@@ -17,5 +17,6 @@ public interface CourseAttendanceService {
     public List<CourseAttendance> findAll();
 
     public CourseAttendance findById(int id);
+    public void submitStudentsAttendance(List<CourseAttendance> courseAttendances);
 
 }

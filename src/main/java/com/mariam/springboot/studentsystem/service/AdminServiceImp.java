@@ -16,13 +16,12 @@ import java.util.Optional;
 public class AdminServiceImp implements AdminService{
     private AdminRepository adminRepository;
     private TeacherRepository teacherRepository;
-    private StudentRepository studentRepository;
+
 
     @Autowired
-    public AdminServiceImp(AdminRepository adminRepository,TeacherRepository teacherRepository,StudentRepository studentRepository) {
+    public AdminServiceImp(AdminRepository adminRepository,TeacherRepository teacherRepository) {
         this.adminRepository = adminRepository;
         this.teacherRepository = teacherRepository;
-        this.studentRepository = studentRepository;
     }
 
 
@@ -58,66 +57,68 @@ public class AdminServiceImp implements AdminService{
         adminRepository.deleteById(adminId);
     }
 
-    @Override
-    public void addTeacher(Teacher teacher) {
-        teacherRepository.save(teacher);
-    }
-    @Override
-    public void deleteTeacherById(int teacherId) {
-        teacherRepository.deleteById(teacherId);
-    }
+//    @Override
+//    public void addTeacher(Teacher teacher) {
+//        teacherRepository.save(teacher);
+//    }
+//    @Override
+//    public void deleteTeacherById(int teacherId) {
+//        teacherRepository.deleteById(teacherId);
+//    }
+//
+//    @Override
+//    public Teacher findTeacherById(int teacherId) {
+//        Optional<Teacher> result = teacherRepository.findById(teacherId);
+//
+//        Teacher theTeacherId = null;
+//
+//        if (result.isPresent()) {
+//            theTeacherId = result.get();
+//        }
+//        else {
+//            // we didn't find the employee
+//            throw new RuntimeException("Did not find employee id - " + teacherId);
+//        }
+//
+//        return theTeacherId;
+//    }
+//
+//    @Override
+//    public List<Teacher> findAllTeachers() {
+//        return teacherRepository.findAll();
+//    }
 
-    @Override
-    public Teacher findTeacherById(int teacherId) {
-        Optional<Teacher> result = teacherRepository.findById(teacherId);
 
-        Teacher theTeacherId = null;
-
-        if (result.isPresent()) {
-            theTeacherId = result.get();
-        }
-        else {
-            // we didn't find the employee
-            throw new RuntimeException("Did not find employee id - " + teacherId);
-        }
-
-        return theTeacherId;
-    }
-
-    @Override
-    public List<Teacher> findAllTeachers() {
-        return teacherRepository.findAll();
-    }
-
-    @Override
-    public void addStudent(Student student) {
-        studentRepository.save(student);
-    }
-
-    @Override
-    public void deleteStudentById(int studentId) {
-        studentRepository.deleteById(studentId);
-    }
-
-    @Override
-    public Student findStudentById(int studentId) {
-        Optional<Student> result = studentRepository.findById(studentId);
-
-        Student theStudent = null;
-
-        if (result.isPresent()) {
-            theStudent = result.get();
-        }
-        else {
-            // we didn't find the employee
-            throw new RuntimeException("Did not find employee id - " + studentId);
-        }
-
-        return theStudent;
-    }
-
-    @Override
-    public List<Student> findAllStudents()  {
-        return studentRepository.findAll();
-    }
+//
+//    @Override
+//    public void addStudent(Student student) {
+//        studentRepository.save(student);
+//    }
+//
+//    @Override
+//    public void deleteStudentById(int studentId) {
+//        studentRepository.deleteById(studentId);
+//    }
+//
+//    @Override
+//    public Student findStudentById(int studentId) {
+//        Optional<Student> result = studentRepository.findById(studentId);
+//
+//        Student theStudent = null;
+//
+//        if (result.isPresent()) {
+//            theStudent = result.get();
+//        }
+//        else {
+//            // we didn't find the employee
+//            throw new RuntimeException("Did not find employee id - " + studentId);
+//        }
+//
+//        return theStudent;
+//    }
+//
+//    @Override
+//    public List<Student> findAllStudents()  {
+//        return studentRepository.findAll();
+//    }
 }

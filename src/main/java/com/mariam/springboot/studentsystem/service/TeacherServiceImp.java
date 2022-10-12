@@ -1,10 +1,7 @@
 package com.mariam.springboot.studentsystem.service;
 
 import com.mariam.springboot.studentsystem.dao.*;
-import com.mariam.springboot.studentsystem.entity.Assignment;
-import com.mariam.springboot.studentsystem.entity.Course;
-import com.mariam.springboot.studentsystem.entity.CourseAttendance;
-import com.mariam.springboot.studentsystem.entity.Student;
+import com.mariam.springboot.studentsystem.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,66 +11,96 @@ import java.util.Optional;
 @Service
 public class TeacherServiceImp implements TeacherService{
     private TeacherRepository teacherRepository;
-    private StudentRepository studentRepository;
-    private CourseRepository courseRepository;
-    private AssignmentRepository assignmentRepository;
-    public CourseAttendanceRepository courseAttendanceRepository;
+
+
+
 
     @Autowired
-    public TeacherServiceImp(TeacherRepository teacherRepository, StudentRepository studentRepository,
-                             CourseRepository courseRepository,AssignmentRepository assignmentRepository,
-                             CourseAttendanceRepository courseAttendanceRepository) {
+    public TeacherServiceImp(TeacherRepository teacherRepository
+                            ) {
         this.teacherRepository = teacherRepository;
-        this.studentRepository = studentRepository;
-        this.courseRepository =courseRepository;
-        this.assignmentRepository = assignmentRepository;
-        this.courseAttendanceRepository = courseAttendanceRepository;
+       ;
+    }
+
+
+
+    @Override
+    public List<Teacher> findAll() {
+        return teacherRepository.findAll();
     }
 
     @Override
-    public Student getStudentData(int studentId) {
-        Optional<Student> result = studentRepository.findById(studentId);
+    public Teacher findById(int theId) {
+        Optional<Teacher> result = teacherRepository.findById(theId);
 
-        Student theStudent = null;
+        Teacher theTeacher = null;
 
         if (result.isPresent()) {
-            theStudent = result.get();
+            theTeacher = result.get();
         }
         else {
             // we didn't find the employee
-            throw new RuntimeException("Did not find employee id - " + studentId);
+            throw new RuntimeException("Did not find employee id - " + theId);
         }
 
-        return theStudent;
+        return theTeacher;
     }
 
     @Override
-    public List<Course> getAllCourses(int TeacherId) {
-        return courseRepository.getAllCourses(TeacherId);
+    public void save(Teacher theTeacher) {
+        teacherRepository.save(theTeacher);
+
     }
 
     @Override
-    public List<Student> getStudentsInCourse(int courseId) {
-        return studentRepository.getStudentsInCourse(courseId);
+    public void deleteById(int theId) {
+        teacherRepository.deleteById(theId);
     }
 
-    @Override
-    public List<Course> viewStudentsAssignedCourses(int studentId) {
-        return courseRepository.viewStudentsAssignedCourses(studentId);
-    }
+//    @Override
+//    public Student getStudentData(int studentId) {
+//        Optional<Student> result = studentRepository.findById(studentId);
+//
+//        Student theStudent = null;
+//
+//        if (result.isPresent()) {
+//            theStudent = result.get();
+//        }
+//        else {
+//            // we didn't find the employee
+//            throw new RuntimeException("Did not find employee id - " + studentId);
+//        }
+//
+//        return theStudent;
+//    }
+//
+//    @Override
+//    public List<Course> getAllCourses(int TeacherId) {
+//        return courseRepository.getAllCourses(TeacherId);
+//    }
 
-    @Override
-    public void addAssignment(Assignment assignment) {
-        assignmentRepository.save(assignment);
-    }
+//    @Override
+//    public List<Student> getStudentsInCourse(int courseId) {
+//        return studentRepository.getStudentsInCourse(courseId);
+//    }
 
-    @Override
-    public void submitStudentsAttendance(List<CourseAttendance> courseAttendances) {
-        for (CourseAttendance courseAttendance:
-                courseAttendances) {
-            courseAttendance.setId(0);
-             courseAttendanceRepository.save(courseAttendance);
-        }
-    }
+//    @Override
+//    public List<Course> viewStudentsAssignedCourses(int studentId) {
+//        return courseRepository.viewStudentsAssignedCourses(studentId);
+//    }
+//
+//    @Override
+//    public void addAssignment(Assignment assignment) {
+//        assignmentRepository.save(assignment);
+//    }
+
+//    @Override
+//    public void submitStudentsAttendance(List<CourseAttendance> courseAttendances) {
+//        for (CourseAttendance courseAttendance:
+//                courseAttendances) {
+//            courseAttendance.setId(0);
+//             courseAttendanceRepository.save(courseAttendance);
+//        }
+//    }
 
 }

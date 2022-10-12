@@ -43,4 +43,12 @@ public class CourseAttendanceServiceImp implements CourseAttendanceService {
         Optional<CourseAttendance> result = courseAttendanceRepository.findById(id);
         return result.orElse(null);
     }
+    @Override
+    public void submitStudentsAttendance(List<CourseAttendance> courseAttendances) {
+        for (CourseAttendance courseAttendance:
+                courseAttendances) {
+            courseAttendance.setId(0);
+            courseAttendanceRepository.save(courseAttendance);
+        }
+    }
 }

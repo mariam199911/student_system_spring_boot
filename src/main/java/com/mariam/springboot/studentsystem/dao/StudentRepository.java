@@ -12,7 +12,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     // add a method to sort by last name
 //    public List<Student> findAll();
-    @Query(value="select s.* from course c,course_student c_s, Student s where s.id= c_s.student_id AND c.id= c_s.course_id AND c.id = ?1", nativeQuery=true)
-    public List<Student> getStudentsInCourse(int courseId);
+//    @Query(value="select s.* from course c,course_student c_s, Student s where s.id= c_s.student_id AND c.id= c_s.course_id AND c.id = ?1", nativeQuery=true)
+//    public List<Student> getStudentsInCourse(int courseId);
 
 }

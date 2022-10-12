@@ -1,5 +1,6 @@
 package com.mariam.springboot.studentsystem.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mariam.springboot.studentsystem.dto.CourseDTO;
 
 import javax.persistence.*;
 import java.util.List;
@@ -51,7 +52,10 @@ public class Course {
 
     public Course() {
     }
-
+    public Course(CourseDTO courseDTO) {
+        this.name = courseDTO.getName();
+        this.id = courseDTO.getId();
+    }
     public Course(String name) {
         this.name = name;
 

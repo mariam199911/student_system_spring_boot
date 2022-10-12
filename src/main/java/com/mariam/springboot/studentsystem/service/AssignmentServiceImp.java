@@ -37,4 +37,9 @@ public class AssignmentServiceImp implements AssignmentService{
         Optional<Assignment> result = assignmentRepository.findById(id);
         return result.orElse(null);
     }
+    @Override
+    public List<Assignment> viewAssignments(int courseId) {
+        return assignmentRepository.viewAssignments(courseId);
+    }
+
 }

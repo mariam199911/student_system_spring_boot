@@ -1,6 +1,6 @@
 package com.mariam.springboot.studentsystem.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import com.mariam.springboot.studentsystem.dto.AssignmentDTO;
 
 
 import javax.persistence.*;
@@ -42,6 +42,11 @@ public class Assignment {
         this.course = newCourse;
         this.description = description;
 
+    }
+    public Assignment(AssignmentDTO assignmentDTO) {
+        this.description = assignmentDTO.getDescription();
+        this.id = assignmentDTO.getId();
+        this.dueDate =assignmentDTO.getDueDate();
     }
 
     public int getId() {

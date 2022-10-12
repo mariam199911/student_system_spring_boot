@@ -18,40 +18,40 @@ public class TeacherController {
     }
 
 
-    @GetMapping("/studentData/{studentId}")
-    public Student listStudents(@PathVariable int studentId) {
-        Student theStudent = teacherService.getStudentData(studentId);
-        return theStudent;
-    }
-    @GetMapping("/allCourses/{teacherId}")
-    public List<Course> listCourses(@PathVariable int teacherId) {
-        List<Course> theCourses = teacherService.getAllCourses(teacherId);
-        return theCourses;
-    }
+//    @GetMapping("/studentData/{studentId}")
+//    public Student listStudents(@PathVariable int studentId) {
+//        Student theStudent = teacherService.getStudentData(studentId);
+//        return theStudent;
+//    }
+//    @GetMapping("/allCourses/{teacherId}")
+//    public List<Course> listCourses(@PathVariable int teacherId) {
+//        List<Course> theCourses = teacherService.getAllCourses(teacherId);
+//        return theCourses;
+//    }
 
-    @GetMapping("/studentCourses/{studentId}")
-    public List<Course> studentCourses(@PathVariable int studentId) {
-        List<Course> theCourses = teacherService.viewStudentsAssignedCourses(studentId);
-        return theCourses;
-    }
+//    @GetMapping("/studentCourses/{studentId}")
+//    public List<Course> studentCourses(@PathVariable int studentId) {
+//        List<Course> theCourses = teacherService.viewStudentsAssignedCourses(studentId);
+//        return theCourses;
+//    }
 
-    @GetMapping("/courseStudents/{courseId}")
-    public List<Student> courseStudents(@PathVariable int courseId) {
-        List<Student> theCourses = teacherService.getStudentsInCourse(courseId);
-        return theCourses;
-    }
+//    @GetMapping("/courseStudents/{courseId}")
+//    public List<Student> courseStudents(@PathVariable int courseId) {
+//        List<Student> theCourses = teacherService.getStudentsInCourse(courseId);
+//        return theCourses;
+//    }
 
-    @PostMapping("/addAssignment")
-    public Assignment addAssignment(@RequestBody Assignment theAssignment) {
+//    @PostMapping("/addAssignment")
+//    public Assignment addAssignment(@RequestBody Assignment theAssignment) {
+//
+//        theAssignment.setId(0);
+//        teacherService.addAssignment(theAssignment);
+//        return theAssignment;
+//    }
 
-        theAssignment.setId(0);
-        teacherService.addAssignment(theAssignment);
-        return theAssignment;
-    }
-
-    @PostMapping("/submitStudentsAttendance")
-    public List<CourseAttendance> submitStudentsAttendance(@RequestBody List<CourseAttendance> courseAttendances) {
-        teacherService.submitStudentsAttendance(courseAttendances);
-        return courseAttendances;
-    }
+//    @PostMapping("/submitStudentsAttendance")
+//    public List<CourseAttendance> submitStudentsAttendance(@RequestBody List<CourseAttendance> courseAttendances) {
+//        teacherService.submitStudentsAttendance(courseAttendances);
+//        return courseAttendances;
+//    }
 }

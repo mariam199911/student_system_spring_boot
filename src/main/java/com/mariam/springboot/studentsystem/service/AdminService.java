@@ -18,23 +18,23 @@ public interface AdminService {
 
 
     ///////////////////////teacher////////////////////////////////////
+//
+//    public void addTeacher(Teacher teacher);
+//
+//    public void deleteTeacherById(int teacherId);
+//
+//    public Teacher findTeacherById(int teacherId);
+//
+//    public List<Teacher> findAllTeachers();
 
-    public void addTeacher(Teacher teacher);
-
-    public void deleteTeacherById(int teacherId);
-
-    public Teacher findTeacherById(int teacherId);
-
-    public List<Teacher> findAllTeachers();
-
-    //////////////////////student//////////////////////////////////////
-
-    public void addStudent(Student student);
-
-    public void deleteStudentById(int studentId);
-
-    public Student findStudentById(int studentId);
-
-    public List<Student> findAllStudents();
+//    //////////////////////student//////////////////////////////////////
+//
+//    public void addStudent(Student student);
+//
+//    public void deleteStudentById(int studentId);
+//
+//    public Student findStudentById(int studentId);
+//
+//    public List<Student> findAllStudents();
 
 }

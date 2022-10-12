@@ -17,16 +17,12 @@ import java.util.Optional;
 @Service
 public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
-    private CourseRepository courseRepository;
-    private AssignmentRepository assignmentRepository;
-    private AssignmentSubmissionRepository assignmentSubmissionRepository;
+
 
     @Autowired
-    public StudentServiceImpl(StudentRepository theStudentRepository,CourseRepository courseRepository,AssignmentRepository assignmentRepository,AssignmentSubmissionRepository assignmentSubmissionRepository) {
+    public StudentServiceImpl(StudentRepository theStudentRepository) {
         this.studentRepository = theStudentRepository;
-        this.courseRepository = courseRepository;
-        this.assignmentRepository = assignmentRepository;
-        this.assignmentSubmissionRepository = assignmentSubmissionRepository;
+
     }
 
     @Override
@@ -66,19 +62,19 @@ public class StudentServiceImpl implements StudentService {
 //        studentRepository.deleteById(studentId);
     }
 
-    @Override
-    public List<Course> viewEnrolledCourses(int studentId) {
-        return courseRepository.viewStudentsAssignedCourses(studentId);
-    }
+//    @Override
+//    public List<Course> viewEnrolledCourses(int studentId) {
+//        return courseRepository.viewStudentsAssignedCourses(studentId);
+//    }
 
-    @Override
-    public List<Assignment> viewAssignments(int courseId) {
-        return assignmentRepository.viewAssignments(courseId);
-    }
+//    @Override
+//    public List<Assignment> viewAssignments(int courseId) {
+//        return assignmentRepository.viewAssignments(courseId);
+//    }
 
-    @Override
-    public void submitAssignment(AssignmentSubmission assignmentSubmission) {
-        assignmentSubmissionRepository.save(assignmentSubmission);
-    }
+//    @Override
+//    public void submitAssignment(AssignmentSubmission assignmentSubmission) {
+//        assignmentSubmissionRepository.save(assignmentSubmission);
+//    }
 }
 

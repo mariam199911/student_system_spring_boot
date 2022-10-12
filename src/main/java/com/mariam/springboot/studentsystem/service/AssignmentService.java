@@ -14,4 +14,6 @@ public interface AssignmentService {
 
     public Assignment findById(int id);
 
+    public List<Assignment> viewAssignments(int courseId);
+
 }

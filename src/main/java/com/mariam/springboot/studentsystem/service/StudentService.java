@@ -21,7 +21,7 @@ public interface StudentService {
 
     //////////////////////////////////////////////////////////////
 
-    public List<Course> viewEnrolledCourses(int studentId);
-    public List<Assignment> viewAssignments(int courseId);
-    public void submitAssignment(AssignmentSubmission assignmentSubmission);
+//    public List<Course> viewEnrolledCourses(int studentId);
+//    public List<Assignment> viewAssignments(int courseId);
+//    public void submitAssignment(AssignmentSubmission assignmentSubmission);
 }

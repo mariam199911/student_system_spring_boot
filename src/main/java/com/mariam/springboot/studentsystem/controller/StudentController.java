@@ -69,25 +69,25 @@ public class StudentController {
     }
 
 
-    @GetMapping("/viewAssignments/{courseId}")
-    public List<Assignment> viewAssignments(@PathVariable int courseId) {
-        // get employees from db
-        List<Assignment> theAssgnments = studentService.viewAssignments(courseId);
-        return theAssgnments;
-    }
+//    @GetMapping("/viewAssignments/{courseId}")
+//    public List<Assignment> viewAssignments(@PathVariable int courseId) {
+//        // get employees from db
+//        List<Assignment> theAssgnments = studentService.viewAssignments(courseId);
+//        return theAssgnments;
+//    }
 
-    @GetMapping("/viewEnrolledCourses/{studentId}")
-    public List<Course> viewEnrolledCourses(@PathVariable int studentId) {
-        // get employees from db
-        List<Course> theCourses = studentService.viewEnrolledCourses(studentId);
-        return theCourses;
-    }
+//    @GetMapping("/viewEnrolledCourses/{studentId}")
+//    public List<Course> viewEnrolledCourses(@PathVariable int studentId) {
+//        // get employees from db
+//        List<Course> theCourses = studentService.viewEnrolledCourses(studentId);
+//        return theCourses;
+//    }
 
-    @PostMapping("/newAssignmentSubmission")
-    public AssignmentSubmission AssignmentSubmission(@RequestBody AssignmentSubmission assignmentSubmission) {
-        assignmentSubmission.setId(0);
-        studentService.submitAssignment(assignmentSubmission);
-        return assignmentSubmission;
-    }
+//    @PostMapping("/newAssignmentSubmission")
+//    public AssignmentSubmission AssignmentSubmission(@RequestBody AssignmentSubmission assignmentSubmission) {
+//        assignmentSubmission.setId(0);
+//        studentService.submitAssignment(assignmentSubmission);
+//        return assignmentSubmission;
+//    }
 
 }
