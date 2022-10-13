@@ -65,6 +65,10 @@ public class Student {
     public Student() {
 
     }
+    public Student(int id,String adress) {
+this.id=id;
+this.address=adress;
+    }
 
     public Student(String name, String email, String mobile, String gender, int age, String address) {
         this.name = name;

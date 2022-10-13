@@ -1,7 +1,10 @@
 package com.mariam.springboot.studentsystem.entity;
 
+import com.mariam.springboot.studentsystem.dto.AssignmentSubmissionDTO;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name="assignment_submission")
@@ -25,9 +28,8 @@ public class AssignmentSubmission {
 
 
 
-
     @Column(name="local_date")
-    private LocalDate local_date;
+    private Date local_date;
 
     @Column(name="content")
     private String content;
@@ -35,12 +37,19 @@ public class AssignmentSubmission {
     @Column(name="marks")
     private int marks;
 
-    public AssignmentSubmission(Assignment assignment, Student student, LocalDate local_date, String content, int marks) {
+    public AssignmentSubmission(Assignment assignment, Student student, Date local_date, String content, int marks) {
         this.assignment = assignment;
         this.student = student;
         this.local_date = local_date;
         this.content = content;
         this.marks = marks;
+    }
+
+    public AssignmentSubmission(AssignmentSubmissionDTO assignmentSubmissionDTO) {
+        this.id = assignmentSubmissionDTO.getId();
+        this.local_date = assignmentSubmissionDTO.getSubmissionDate();
+        this.content = assignmentSubmissionDTO.getContentSubmitted();
+        this.marks = assignmentSubmissionDTO.getMark();
     }
 
     public AssignmentSubmission() {
@@ -73,11 +82,11 @@ public class AssignmentSubmission {
 
 
 
-    public LocalDate getLocal_date() {
+    public Date getLocal_date() {
         return local_date;
     }
 
-    public void setLocal_date(LocalDate local_date) {
+    public void setLocal_date(Date local_date) {
         this.local_date = local_date;
     }
 
