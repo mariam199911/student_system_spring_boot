@@ -2,11 +2,8 @@ package com.mariam.springboot.studentsystem.controller;
 
 
 import com.mariam.springboot.studentsystem.dto.CourseDTO;
-import com.mariam.springboot.studentsystem.entity.Assignment;
-import com.mariam.springboot.studentsystem.entity.Course;
 import com.mariam.springboot.studentsystem.entity.Student;
 import com.mariam.springboot.studentsystem.facade.CourseFacade;
-import com.mariam.springboot.studentsystem.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,10 +66,7 @@ public class CourseController {
         return courseFacade.getStudentsInCourse(courseId);
     }
 
-//    @GetMapping("/courses/{courseId}/assignments")
-//    public List<Assignment> getAssignmentsInCourse(@PathVariable int courseId) {
-//        return courseService.getAssignmentsInCourse(courseId);
-//    }
+
 @GetMapping("/viewEnrolledCourses/{studentId}")
 public List<CourseDTO> viewEnrolledCourses(@PathVariable int studentId) {
     // get employees from db

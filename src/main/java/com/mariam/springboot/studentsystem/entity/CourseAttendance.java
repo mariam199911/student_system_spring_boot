@@ -1,6 +1,6 @@
 package com.mariam.springboot.studentsystem.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mariam.springboot.studentsystem.dto.CourseAttendanceDTO;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,7 +22,7 @@ public class CourseAttendance {
     private Student student;
 
     @Column(name="attendance_date")
-    private Date attendencceDate;
+    private Date attendanceDate;
 
     @Column(name="status")
     private String status;
@@ -33,9 +33,15 @@ public class CourseAttendance {
     public CourseAttendance(Course course, Student student, Date attendencce_date, String status) {
         this.course = course;
         this.student = student;
-        this.attendencceDate = attendencce_date;
+        this.attendanceDate = attendencce_date;
         this.status = status;
     }
+    public CourseAttendance(CourseAttendanceDTO courseAttendanceDTO) {
+        this.id = courseAttendanceDTO.getId();
+        this.attendanceDate = courseAttendanceDTO.getAttendanceDate();
+        this.status = courseAttendanceDTO.getStatus();
+    }
+
 
     public int getId() {
         return id;
@@ -61,12 +67,12 @@ public class CourseAttendance {
         this.student = student;
     }
 
-    public Date getAttendencce_date() {
-        return attendencceDate;
+    public Date getAttendanceDate() {
+        return attendanceDate;
     }
 
-    public void setAttendencce_date(Date attendencce_date) {
-        this.attendencceDate = attendencce_date;
+    public void setAttendanceDate(Date attendencce_date) {
+        this.attendanceDate = attendencce_date;
     }
 
     public String getStatus() {
@@ -83,7 +89,7 @@ public class CourseAttendance {
                 "id=" + id +
                 ", course=" + course +
                 ", student=" + student +
-                ", attendencce_date=" + attendencceDate +
+                ", attendencce_date=" + attendanceDate +
                 ", status='" + status + '\'' +
                 '}';
     }
