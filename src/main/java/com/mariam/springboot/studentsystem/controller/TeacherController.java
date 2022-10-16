@@ -17,8 +17,6 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
-
-//////////////////////////////// teacher ////////////////////////////////////////
     @PostMapping("/newTeacher")
     public Teacher addTeacher(@RequestBody Teacher theTeacher) {
         theTeacher.setId(0);
@@ -33,30 +31,21 @@ public class TeacherController {
         return theTeacher;
     }
 
-    @DeleteMapping("/deleteTeacher/{teacherId}")
+    @DeleteMapping("/{teacherId}")
     public String deleteTeacher(@PathVariable int teacherId) {
-        Teacher tempAdmin = teacherService.findById(teacherId);
-        if (tempAdmin == null) {
-//            throw new AdminNotFoundException("Admin id not found - " + theId);
-            System.out.println("Teacher id not found - " + teacherId);
-        }
         teacherService.deleteById(teacherId);
         return "Deleted Teacher id - " + teacherId;
     }
 
-    @GetMapping("/teacherList")
+    @GetMapping("/list")
     public List<Teacher> listTeachers(Model theModel) {
         List<Teacher> theTeacher = teacherService.findAll();
         return theTeacher;
     }
 
-    @GetMapping("teacherList/{teacherId}")
+    @GetMapping("/{teacherId}")
     public Teacher getTeacher(@PathVariable int teacherId) {
         Teacher theTeacher = teacherService.findById(teacherId);
-        if (theTeacher == null) {
-//            throw new AdminNotFoundException("Admin id not found - " + AdminId);
-            System.out.println("Teacher id not found - " + teacherId);
-        }
         return theTeacher;
     }
 }
