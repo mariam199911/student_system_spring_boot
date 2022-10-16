@@ -52,13 +52,11 @@ public class Course {
 
     public Course() {
     }
-    public Course(CourseDTO courseDTO) {
-        this.name = courseDTO.getName();
-        this.id = courseDTO.getId();
-    }
     public Course(String name) {
         this.name = name;
-
+    }
+    public Course(int teacherId) {
+        this.teacher.setId(teacherId);
     }
 
     public int getId() {
@@ -104,6 +102,7 @@ public class Course {
     public List<CourseAttendance> getCourseAttendences() {
         return courseAttendences;
     }
+
 
     public void setCourseAttendences(List<CourseAttendance> courseAttendences) {
         this.courseAttendences = courseAttendences;

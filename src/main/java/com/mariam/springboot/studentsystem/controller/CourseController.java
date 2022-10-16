@@ -2,8 +2,10 @@ package com.mariam.springboot.studentsystem.controller;
 
 
 import com.mariam.springboot.studentsystem.dto.CourseDTO;
+import com.mariam.springboot.studentsystem.entity.Course;
 import com.mariam.springboot.studentsystem.entity.Student;
-import com.mariam.springboot.studentsystem.facade.CourseFacade;
+import com.mariam.springboot.studentsystem.entity.Teacher;
+import com.mariam.springboot.studentsystem.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,66 +13,66 @@ import java.util.List;
 
 @RestController
 public class CourseController {
-    private CourseFacade courseFacade;
+    private CourseService courseService;
 
     @Autowired
-    public CourseController(CourseFacade courseFacade) {
-        this.courseFacade = courseFacade;
+    public CourseController(CourseService courseService) {
+        this.courseService = courseService;
     }
 
 
     @GetMapping("/courses")
-    public List<CourseDTO> viewAllCourses() {
-        return courseFacade.findAll();
+    public List<Course> viewAllCourses() {
+        return courseService.findAll();
     }
 
     @GetMapping("/courses/{courseId}")
-    public CourseDTO getCourse(@PathVariable int courseId) {
-        CourseDTO courseDTO = courseFacade.findById(courseId);
-
-        if(courseDTO == null) {
-            throw new RuntimeException("Course id not found - " + courseId);
-        }
-
-        return courseDTO;
+    public Course getCourse(@PathVariable int courseId) {
+        Course course = courseService.findById(courseId);
+        return course;
     }
 
     @PostMapping("/courses")
-    public CourseDTO addCourse(@RequestBody CourseDTO courseDTO) {
-        courseDTO.setId(0);
-        courseFacade.save(courseDTO);
-        return courseDTO;
+    public Course addCourse(@RequestBody CourseDTO course) {
+        course.setId(0);
+        Course courseEntity=new Course();
+        courseEntity.setId(course.getId());
+        courseEntity.setName(course.getName());
+        Teacher teacher=new Teacher();
+        teacher.setId(course.getTeacherId());
+        courseEntity.setTeacher(teacher);
+        courseService.save(courseEntity);
+        return courseEntity;
     }
 
     @PutMapping("/courses")
-    public CourseDTO updateCourse(@RequestBody CourseDTO courseDTO) {
-        courseFacade.save(courseDTO);
-        return courseDTO;
+    public Course updateCourse(@RequestBody CourseDTO course) {
+        Course courseEntity=new Course();
+        courseEntity.setId(course.getId());
+        courseEntity.setName(course.getName());
+        Teacher teacher=new Teacher();
+        teacher.setId(course.getTeacherId());
+        courseEntity.setTeacher(teacher);
+        courseService.save(courseEntity);
+        return courseEntity;
     }
 
     @DeleteMapping("/courses/{courseId}")
     public String removeCourse(@PathVariable int courseId) {
-        CourseDTO courseDTO = courseFacade.findById(courseId);
-
-        if(courseDTO == null) {
-            throw new RuntimeException("Course id not found - " + courseId);
-        }
-
-        courseFacade.deleteById(courseId);
-
+        courseService.deleteById(courseId);
         return "Deleted Course id - " + courseId;
     }
 
     @GetMapping("/courses/students/{courseId}")
     public List<Student> getStudentsInCourse(@PathVariable int courseId) {
-        return courseFacade.getStudentsInCourse(courseId);
+        return courseService.getStudentsInCourse(courseId);
     }
 
 
 @GetMapping("/viewEnrolledCourses/{studentId}")
-public List<CourseDTO> viewEnrolledCourses(@PathVariable int studentId) {
+public List<Course> viewEnrolledCourses(@PathVariable int studentId) {
     // get employees from db
-    List<CourseDTO> theCourses = courseFacade.viewEnrolledCourses(studentId);
+    List<Course> theCourses = courseService.viewEnrolledCourses(studentId);
     return theCourses;
 }
 
