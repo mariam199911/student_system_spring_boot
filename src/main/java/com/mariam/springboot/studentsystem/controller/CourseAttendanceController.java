@@ -1,7 +1,10 @@
 package com.mariam.springboot.studentsystem.controller;
 
 import com.mariam.springboot.studentsystem.dto.CourseAttendanceDTO;
+import com.mariam.springboot.studentsystem.entity.Course;
 import com.mariam.springboot.studentsystem.entity.CourseAttendance;
+import com.mariam.springboot.studentsystem.entity.Student;
+import com.mariam.springboot.studentsystem.entity.Teacher;
 import com.mariam.springboot.studentsystem.facade.CourseAttendanceFacade;
 import com.mariam.springboot.studentsystem.service.CourseAttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,54 +16,65 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/courseAttendances")
 public class CourseAttendanceController {
-//    private CourseAttendanceService courseAttendanceService;
-//
-//    @Autowired
-//    public CourseAttendanceController(CourseAttendanceService courseAttendanceService) {
-//        this.courseAttendanceService = courseAttendanceService;
-//    }
-//
-//
-//    @GetMapping("/list")
-//    public List<CourseAttendance> viewAllCourseAttendances() {
-//        return courseAttendanceService.findAll();
-//    }
-//
-//    @GetMapping("/{courseAttendanceId}")
-//    public CourseAttendance getCourseAttendance(@PathVariable int courseAttendanceId) {
-//        CourseAttendance courseAttendance = courseAttendanceService.findById(courseAttendanceId);
-//
-//        if(courseAttendance == null) {
-//            throw new RuntimeException("CourseAttendance id not found - " + courseAttendanceId);
-//        }
-//
-//        return courseAttendance;
-//    }
-//
-//    @PostMapping("/newCourseAttendances")
-//    public CourseAttendance addCourseAttendance(@RequestBody CourseAttendance courseAttendance) {
-//
-//        courseAttendance.setId(0);
-//
-//        courseAttendanceService.save(courseAttendance);
-//
-//        return courseAttendance;
-//    }
-//
-//    @DeleteMapping("/{courseAttendanceId}")
-//    public String removeCourseAttendance(@PathVariable int courseAttendanceId) {
-//        CourseAttendance courseAttendance = courseAttendanceService.findById(courseAttendanceId);
-//
-//        if(courseAttendance == null) {
-//            throw new RuntimeException("CourseAttendance id not found - " + courseAttendanceId);
-//        }
-//
-//        courseAttendanceService.deleteById(courseAttendanceId);
-//
-//        return "Deleted CourseAttendance id - " + courseAttendanceId;
-//    }
-//
-//
+    private CourseAttendanceService courseAttendanceService;
+
+    @Autowired
+    public CourseAttendanceController(CourseAttendanceService courseAttendanceService) {
+        this.courseAttendanceService = courseAttendanceService;
+    }
+
+
+    @GetMapping("/list")
+    public List<CourseAttendance> viewAllCourseAttendances() {
+        return courseAttendanceService.findAll();
+    }
+
+    @GetMapping("/{courseAttendanceId}")
+    public CourseAttendance getCourseAttendance(@PathVariable int courseAttendanceId) {
+        CourseAttendance courseAttendance = courseAttendanceService.findById(courseAttendanceId);
+        return courseAttendance;
+    }
+
+    @PostMapping("/newCourseAttendances")
+    public CourseAttendance addCourseAttendance(@RequestBody CourseAttendanceDTO courseAttendanceDTO) {
+
+        Course course=new Course();
+        course.setId(courseAttendanceDTO.getCourseId());
+        Student student = new Student();
+        student.setId(courseAttendanceDTO.getStudentId());
+        CourseAttendance courseAttendance = new CourseAttendance();
+        courseAttendance.setId(0);
+        courseAttendance.setCourse(course);
+        courseAttendance.setAttendanceDate(courseAttendanceDTO.getAttendanceDate());
+        courseAttendance.setStudent(student);
+        courseAttendance.setStatus(courseAttendanceDTO.getStatus());
+        courseAttendanceService.save(courseAttendance);
+        return courseAttendance;
+    }
+
+    @PutMapping("/newCourseAttendances")
+    public CourseAttendance updateCourseAttendance(@RequestBody CourseAttendanceDTO courseAttendanceDTO) {
+        Course course=new Course();
+        course.setId(courseAttendanceDTO.getCourseId());
+        Student student = new Student();
+        student.setId(courseAttendanceDTO.getStudentId());
+        CourseAttendance courseAttendance = new CourseAttendance();
+        courseAttendance.setCourse(course);
+        courseAttendance.setAttendanceDate(courseAttendanceDTO.getAttendanceDate());
+        courseAttendance.setStudent(student);
+        courseAttendance.setStatus(courseAttendanceDTO.getStatus());
+        courseAttendance.setId(courseAttendanceDTO.getId());
+        courseAttendanceService.save(courseAttendance);
+        return courseAttendance;
+    }
+
+    @DeleteMapping("/{courseAttendanceId}")
+    public String removeCourseAttendance(@PathVariable int courseAttendanceId) {
+        courseAttendanceService.deleteById(courseAttendanceId);
+        return "Deleted CourseAttendance id - " + courseAttendanceId;
+    }
+
+
 //    @PostMapping("/submitAll")
 //    public List<CourseAttendance> submitStudentsAttendance(@RequestBody List<CourseAttendance> courseAttendances) {
 //
@@ -73,51 +87,15 @@ public class CourseAttendanceController {
 //
 //        return courseAttendances;
 //    }
-private CourseAttendanceFacade courseAttendanceFacade;
-
-    @Autowired
-    public CourseAttendanceController(CourseAttendanceFacade courseAttendanceFacade) {
-        this.courseAttendanceFacade = courseAttendanceFacade;
-    }
-
-
-    @GetMapping("/list")
-    public List<CourseAttendanceDTO> viewAllCourseAttendances() {
-        return courseAttendanceFacade.findAll();
-    }
-
-    @GetMapping("/list/{courseAttendanceId}")
-    public CourseAttendanceDTO getCourseAttendance(@PathVariable int courseAttendanceId) {
-        return courseAttendanceFacade.findById(courseAttendanceId);
-    }
-
-    @PostMapping("/newCourseAttendances")
-    public CourseAttendanceDTO addCourseAttendance(@RequestBody CourseAttendanceDTO courseAttendanceDTO) {
-        courseAttendanceDTO.setId(0);
-        courseAttendanceFacade.add(courseAttendanceDTO);
-        return courseAttendanceDTO;
-    }
-
-    @PutMapping("/newCourseAttendances")
-    public CourseAttendanceDTO updateCourseAttendance(@RequestBody CourseAttendanceDTO courseAttendanceDTO) {
-        courseAttendanceFacade.add(courseAttendanceDTO);
-        return courseAttendanceDTO;
-    }
-
-    @DeleteMapping("/{courseAttendanceId}")
-    public String removeCourseAttendance(@PathVariable int courseAttendanceId) {
-        courseAttendanceFacade.deleteById(courseAttendanceId);
-        return "Deleted CourseAttendance id - " + courseAttendanceId;
-    }
-
-
-    @PostMapping("/submitAll")
-    public List<CourseAttendanceDTO> submitStudentsAttendance(@RequestBody List<CourseAttendanceDTO> courseAttendanceDTOs) {
-
-        courseAttendanceFacade.addAll(
-                courseAttendanceDTOs
-        );
-
-        return courseAttendanceDTOs;
-    }
+//
+//        @PostMapping("/submitAll")
+//    public List<CourseAttendance> submitStudentsAttendance(@RequestBody List<CourseAttendanceDTO> courseAttendanceDTOs) {
+//
+//        courseAttendanceService.saveAll(
+//
+//                courseAttendanceDTOs
+//        );
+//
+//        return courseAttendanceDTOs;
+//    }
 }

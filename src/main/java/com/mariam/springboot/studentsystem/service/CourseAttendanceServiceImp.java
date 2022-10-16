@@ -2,11 +2,11 @@ package com.mariam.springboot.studentsystem.service;
 
 import com.mariam.springboot.studentsystem.dao.CourseAttendanceRepository;
 import com.mariam.springboot.studentsystem.entity.CourseAttendance;
+import com.mariam.springboot.studentsystem.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CourseAttendanceServiceImp implements CourseAttendanceService {
@@ -17,9 +17,15 @@ public class CourseAttendanceServiceImp implements CourseAttendanceService {
     public CourseAttendanceServiceImp(CourseAttendanceRepository courseAttendanceRepository) {
         this.courseAttendanceRepository = courseAttendanceRepository;
     }
+    @Override
+    public CourseAttendance findById(int id) {
+        CourseAttendance result = courseAttendanceRepository.findById(id).orElseThrow(()->  new NotFoundException("id not found "+ id));
+        return result;
+    }
 
     @Override
     public void save(CourseAttendance courseAttendance) {
+
         courseAttendanceRepository.save(courseAttendance);
     }
 
@@ -30,6 +36,7 @@ public class CourseAttendanceServiceImp implements CourseAttendanceService {
 
     @Override
     public void deleteById(int id) {
+        findById(id);
         courseAttendanceRepository.deleteById(id);
     }
 
@@ -38,17 +45,4 @@ public class CourseAttendanceServiceImp implements CourseAttendanceService {
         return courseAttendanceRepository.findAll();
     }
 
-    @Override
-    public CourseAttendance findById(int id) {
-        Optional<CourseAttendance> result = courseAttendanceRepository.findById(id);
-        return result.orElse(null);
-    }
-    @Override
-    public void submitStudentsAttendance(List<CourseAttendance> courseAttendances) {
-        for (CourseAttendance courseAttendance:
-                courseAttendances) {
-            courseAttendance.setId(0);
-            courseAttendanceRepository.save(courseAttendance);
-        }
-    }
 }

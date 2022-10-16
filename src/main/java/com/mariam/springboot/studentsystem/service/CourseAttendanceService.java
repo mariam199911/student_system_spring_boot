@@ -2,6 +2,7 @@ package com.mariam.springboot.studentsystem.service;
 
 
 
+import com.mariam.springboot.studentsystem.dto.CourseAttendanceDTO;
 import com.mariam.springboot.studentsystem.entity.CourseAttendance;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public interface CourseAttendanceService {
     public List<CourseAttendance> findAll();
 
     public CourseAttendance findById(int id);
-    public void submitStudentsAttendance(List<CourseAttendance> courseAttendances);
+//    public void addAll(List<CourseAttendance> courseAttendances);
+
 
 }
