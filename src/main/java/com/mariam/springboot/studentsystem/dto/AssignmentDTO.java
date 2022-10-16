@@ -8,6 +8,7 @@ import java.util.Date;
 public class AssignmentDTO {
 
     private int id;
+    private String name;
 
     private String description;
 
@@ -18,12 +19,12 @@ public class AssignmentDTO {
     public AssignmentDTO() {
     }
 
-    public AssignmentDTO(Assignment assignment) {
-        this.id = assignment.getId();
-        this.description = assignment.getDescription();
-        this.courseId = assignment.getCourse().getId();
-        this.dueDate = assignment.getDueDate();
-    }
+//    public AssignmentDTO(Assignment assignment) {
+//        this.id = assignment.getId();
+//        this.description = assignment.getDescription();
+//        this.courseId = assignment.getCourse().getId();
+//        this.dueDate = assignment.getDueDate();
+//    }
 
     public int getId() {
         return id;
@@ -55,6 +56,14 @@ public class AssignmentDTO {
 
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 
