@@ -27,10 +27,6 @@ public class AdminController {
     @GetMapping("/{adminId}")
     public Admin getAdmin(@PathVariable int adminId) {
         Admin theAdmin = adminService.findById(adminId);
-        if (theAdmin == null) {
-//            throw new AdminNotFoundException("Admin id not found - " + AdminId);
-            System.out.println("Admin id not found - " + adminId);
-        }
         return theAdmin;
     }
 
@@ -51,11 +47,6 @@ public class AdminController {
 
     @DeleteMapping("/{adminId}")
     public String deleteAdmin(@PathVariable int adminId) {
-        Admin tempAdmin = adminService.findById(adminId);
-        if (tempAdmin == null) {
-//            throw new AdminNotFoundException("Admin id not found - " + theId);
-            System.out.println("Admin id not found - " + adminId);
-        }
         adminService.deleteById(adminId);
         return "Deleted Admin id - " + adminId;
     }
