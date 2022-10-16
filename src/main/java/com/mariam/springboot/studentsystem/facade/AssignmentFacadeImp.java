@@ -3,6 +3,7 @@ package com.mariam.springboot.studentsystem.facade;
 import com.mariam.springboot.studentsystem.dto.AssignmentDTO;
 import com.mariam.springboot.studentsystem.entity.Assignment;
 import com.mariam.springboot.studentsystem.entity.Course;
+import com.mariam.springboot.studentsystem.exception.NotFoundException;
 import com.mariam.springboot.studentsystem.service.AssignmentService;
 import com.mariam.springboot.studentsystem.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,9 @@ public class AssignmentFacadeImp implements  AssignmentFacade{
         Assignment assignment = assignmentService.findById(id);
 
         if(assignment == null) {
-            throw new RuntimeException("Assignment id not found - " + id);
+
+            throw new NotFoundException("Assignment id not found - " + id);
+//            throw new RuntimeException("Assignment id not found - " + id);
         }
 
         assignmentService.deleteById(id);
@@ -62,7 +65,8 @@ public class AssignmentFacadeImp implements  AssignmentFacade{
         Assignment assignment = assignmentService.findById(id);
 
         if(assignment == null) {
-            throw new RuntimeException("Assignment id not found - " + id);
+            throw new NotFoundException("Assignment id not found - " + id);
+//            throw new RuntimeException("Assignment id not found - " + id);
         }
 
         return convertToDto(assignment);
