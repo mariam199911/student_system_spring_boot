@@ -19,12 +19,6 @@ public class AssignmentDTO {
     public AssignmentDTO() {
     }
 
-//    public AssignmentDTO(Assignment assignment) {
-//        this.id = assignment.getId();
-//        this.description = assignment.getDescription();
-//        this.courseId = assignment.getCourse().getId();
-//        this.dueDate = assignment.getDueDate();
-//    }
 
     public int getId() {
         return id;

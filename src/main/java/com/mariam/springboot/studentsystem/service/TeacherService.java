@@ -15,12 +15,5 @@ public interface TeacherService {
 
     public void deleteById(int teacherId);
 
-    ///////////////////////////////////////////
-
-
-
-//    public List<Course> viewStudentsAssignedCourses(int studentId);
-
-//    public void submitStudentsAttendance(List<CourseAttendance> courseAttendances);
 
 }

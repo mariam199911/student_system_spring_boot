@@ -4,8 +4,6 @@ import com.mariam.springboot.studentsystem.dto.CourseAttendanceDTO;
 import com.mariam.springboot.studentsystem.entity.Course;
 import com.mariam.springboot.studentsystem.entity.CourseAttendance;
 import com.mariam.springboot.studentsystem.entity.Student;
-import com.mariam.springboot.studentsystem.entity.Teacher;
-import com.mariam.springboot.studentsystem.facade.CourseAttendanceFacade;
 import com.mariam.springboot.studentsystem.service.CourseAttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
